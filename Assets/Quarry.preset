@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quarry
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: ff18dcd7f8923d34684fdac353011bd1,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: xSize
+    value: 200
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: zSize
+    value: 200
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: octaves
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: uPersistence
+    value: 2.41
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: uLacunarity
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: uScale
+    value: 4.52
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: dPersistence
+    value: 2.8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: dLacunarity
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: dScale
+    value: 4.3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: depth
+    value: 32.69
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: moveSample
+    value: 15.7
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[0].name
+    value: Peaks
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[0].height
+    value: 999
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[0].color.r
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[0].color.g
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[0].color.b
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[0].color.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[1].name
+    value: Mountains
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[1].height
+    value: 35
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[1].color.r
+    value: 0.09411766
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[1].color.g
+    value: 0.16470589
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[1].color.b
+    value: 0.24705884
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[1].color.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[2].name
+    value: GroundLevel
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[2].height
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[2].color.r
+    value: 0.0627451
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[2].color.g
+    value: 0.21568629
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[2].color.b
+    value: 0.007843138
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[2].color.a
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[3].name
+    value: Depths
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[3].height
+    value: -10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[3].color.r
+    value: 0.13207549
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[3].color.g
+    value: 0.075471714
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[3].color.b
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: regions.Array.data[3].color.a
+    value: 0
+    objectReference: {fileID: 0}
