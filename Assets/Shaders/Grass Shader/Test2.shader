@@ -33,10 +33,17 @@ Shader "Grass Custom"
         _TessellationCulling("Tessellation Culling", Range(0.01, 0.2)) = 0.05
 
         [Header(Wind Movement)]
+        [Toggle] _WindMap("Use Wind Map", Float) = 1
+        _WindCulling("Wind Culling Distance", Range(1, 100)) = 50
+
+        [Header(Trigonometric Wind)]
+        _TrigFrequency("Time Adjustment", Range(0.01,2)) = 1
+        _TrigStrength("Wind Strength", Range(0,2)) = 0.5
+
+        [Header(Wind Map)]
         _WindDistortionMap("Wind Map", 2D) = "white" {}
         _WindFrequency("Wind Frequency", Vector) = (0.05, 0.05, 0, 0)
         _WindStrength("Wind Strength", Range(0.01,2)) = 0.5
-        _WindCulling("Wind Culling Distance", Range(1, 100)) = 50
 
         [Header(Second Plant)]
         _StemPlacementNoise("Stem Placement Noise", Range(0, 1)) = 0.05
@@ -160,8 +167,21 @@ Shader "Grass Custom"
                 float noiseValue;
                 Unity_GradientNoise_float(input.positionWS.xz, _ColorNoiseScale, noiseValue);
                 float4 color = lerp(lerp(input.bottomColor, input.topColor, input.uv.y), input.deadColor, noiseValue * _ColorNoiseStrength) * float4(shading, 1);
+                color = color + float4(specular, 0);
 
-                return color + float4(specular, 0);
+                //===================================================================
+                // Clamp color value to no higher than 1
+                //===================================================================
+                if (1.0f < color.x)
+                    color.x = 1.0f;
+                if (1.0f < color.y)
+                    color.y = 1.0f;
+                if (1.0f < color.z)
+                    color.z = 1.0f;
+                if (1.0f < color.w)
+                    color.w = 1.0f;
+
+                return color;
             }
 
             ENDHLSL

@@ -11,6 +11,7 @@ float4 _BottomColor;
 float4 _DeadColor;
 float _ColorNoiseScale;
 float _ColorNoiseStrength;
+
 float _BladeWidth;
 float _BladeWidthRandom;
 float _BladeHeight;
@@ -22,11 +23,14 @@ float _BladeCurve;
 float _BendRotationRandom;
 float _TessellationUniform;
 float _TessellationCulling;
+float _WindMap;
+float _WindCulling;
+float _TrigFrequency;
+float _TrigStrength;
 sampler2D _WindDistortionMap;
 float4 _WindDistortionMap_ST;
 float2 _WindFrequency;
 float _WindStrength;
-float _WindCulling;
 
 float _StemPlacementNoise;
 float _StemPlacementEdge;
@@ -103,6 +107,16 @@ void Unity_GradientNoise_float(float2 UV, float Scale, out float Out)
     float d11 = dot(Unity_GradientNoise_Dir_float(ip + float2(1, 1)), fp - float2(1, 1));
     fp = fp * fp * fp * (fp * (fp * 6 - 15) + 10);
     Out = lerp(lerp(d00, d01, fp.y), lerp(d10, d11, fp.y), fp.x) + 0.5;
+}
+
+void Unity_Multiply_float(float2 A, float2 B, out float2 Out)
+{
+    Out = A * B;
+}
+
+void Unity_Add_float4(float4 A, float4 B, out float4 Out)
+{
+    Out = A + B;
 }
 
 float rand(float3 seed)
@@ -187,10 +201,28 @@ void buildGrassVertexes(GeomData input, inout GeomData geoms[BLADE_SEGMENTS * 2 
     float z = (TransformWorldToView(input.positionWS)).z * -1;
     if (z < _WindCulling)
     {
-        float2 uv = input.positionWS.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw + _WindFrequency * _Time.y;
-        float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1) * _WindStrength;
-        float3 wind = normalize(float3(windSample, 0));
-        windMatrix = AngleAxis3x3(PI * windSample, wind);
+        if (_WindMap)
+        {
+            float2 uv = input.positionWS.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw + _WindFrequency * _Time.y;
+            float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1) * _WindStrength;
+            float3 wind = normalize(float3(windSample, 0));
+            windMatrix = AngleAxis3x3(PI * windSample, wind);
+        }
+        else
+        {
+            if (_TrigStrength != 0)
+            {
+                float r = rand(input.positionWS.xyz);
+                float xMov = _Time.y * _TrigFrequency + input.positionWS.x * 0.5f;
+                float zMov = _Time.y * _TrigFrequency + input.positionWS.z * 0.5f;
+                float2 wind = float2(sin(xMov), cos(zMov)) * _TrigStrength * sin(_Time.y * _TrigFrequency + r) * float2(0.5f, 1.0f);
+                windMatrix = AngleAxis3x3((wind * PI).y, normalize(float3(wind.x, wind.x, wind.y)));
+            }
+            else
+            {
+                windMatrix = float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1); // Identity
+            }
+        }
     }
     else
     {
@@ -292,10 +324,28 @@ void buildStemVertexes(GeomData input, inout GeomData geoms[STEM_SEGMENTS * 2 + 
     float z = (TransformWorldToView(input.positionWS)).z * -1;
     if (z < _WindCulling)
     {
-        float2 uv = input.positionWS.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw + _WindFrequency * _Time.y;
-        float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1) * _WindStrength;
-        float3 wind = normalize(float3(windSample, 0));
-        windMatrix = AngleAxis3x3(PI * windSample, wind);
+        if (_WindMap)
+        {
+            float2 uv = input.positionWS.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw + _WindFrequency * _Time.y;
+            float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1) * _WindStrength;
+            float3 wind = normalize(float3(windSample, 0));
+            windMatrix = AngleAxis3x3(PI * windSample, wind);
+        }
+        else
+        {
+            if (_TrigStrength != 0)
+            {
+                float r = rand(input.positionWS.xyz);
+                float xMov = _Time.y * _TrigFrequency + input.positionWS.x * 0.5f;
+                float zMov = _Time.y * _TrigFrequency + input.positionWS.z * 0.5f;
+                float2 wind = float2(sin(xMov), cos(zMov)) * _TrigStrength * sin(_Time.y * _TrigFrequency + r) * float2(0.5f, 1.0f);
+                windMatrix = AngleAxis3x3((wind * PI).y, normalize(float3(wind.x, wind.x, wind.y)));
+            }
+            else
+            {
+                windMatrix = float3x3(1, 0, 0, 0, 1, 0, 0, 0, 1); // Identity
+            }
+        }
     }
     else
     {
