@@ -1,5 +1,7 @@
 # **Procedural Grass Shader**
 
+![image](https://user-images.githubusercontent.com/48114601/120564007-89a6f900-c3cf-11eb-9350-7368b729ce59.png)
+
 ### 1 **Introduction**
 
   1.1 **Overview**
@@ -75,7 +77,7 @@ Abandoning this involved writing custom vertex and fragment shaders. Things went
 
 One thing to note within the geometry shader is that the original mesh triangles used to place grass blades are being discarded. The only vertex/triangle data passed on to the fragment shader are the grass blades. The reason for this is to allow the ground mesh to show through/between the grass blades, as seen here:
 
-![](RackMultipart20210602-4-iqprec_html_a34010a9b3a8fac1.jpg)
+![image](https://user-images.githubusercontent.com/48114601/120563987-7bf17380-c3cf-11eb-99d9-e7c0f7f7b71f.png)
 
 There are two optimizations used for performance gain here. First, any grass blades that are behind the user&#39;s camera are not drawn. Second, if the distance from the camera is greater than a particular threshold set in the inspector, the grass will not be animated using the wind map.
 
@@ -92,15 +94,15 @@ I accomplished my basic goals; I learned quite a bit about Unity and Geometry/Te
 
 The following images are of various types of grass built using this shader. These all use the same shader, adjusting the controllable parameters located within the inspector to achieve the different forms/visuals.
 
-![](RackMultipart20210602-4-iqprec_html_f2c22bdc1717b035.jpg)
+![image](https://user-images.githubusercontent.com/48114601/120563973-7431cf00-c3cf-11eb-9059-420861635e03.png)
 
 _This shows a basic grass type. My intention here was to simply make a nice-looking normal grass type. This is the included material called &#39;original&#39;._
 
-![](RackMultipart20210602-4-iqprec_html_c4009afd434c5ac5.jpg)
+![image](https://user-images.githubusercontent.com/48114601/120563958-6c722a80-c3cf-11eb-876d-7bc20bd6d09e.png)
 
 _This shows a taller type of grass along with a secondary plant type. The taller grass is a bit thinner. The secondary plant is set to long, wide blades with a lot of lean/bend using the same methods as the grass. This material is included as &#39;TallGrass&#39;._
 
-![](RackMultipart20210602-4-iqprec_html_116fb142bc36af77.jpg)
+![image](https://user-images.githubusercontent.com/48114601/120563946-6714e000-c3cf-11eb-81dd-00e311130cf1.png)
 
 _This shows an attempt to make grass that is flat to the ground. The shadows and lighting start to break down a bit when the blade&#39;s lean is turned to an extreme angle, so getting this to look good was difficult. The brown blades flat against the ground are the base plant type, while the taller tufts of grass are the secondary plant type, placed in a patchy patter using a noise map._
 
@@ -110,7 +112,7 @@ In all three of these examples the color variations can be seen, and height vari
 
 The primary issue currently is with the shadows. Received shadows work well, but aliasing issues arise around the edges when the blades are made large. Increasing the number of triangles in the blade may solve this. Cast shadows are much more of a problem. In general, the issue isn&#39;t noticeable for typical grass, but it can become very ugly once you start pushing the limits of the potential values of the parameters. Large blades show the issues starkly. The shadows are highly pixelated and it&#39;s unclear if every blade is properly casting a shadow. Also, take note of the two blades that are covered with black lines. This is an issue that seems to happen when you have too many blades within the same area. I&#39;m not sure of the details behind why this happens, but it needs to be investigated.
 
-![](RackMultipart20210602-4-iqprec_html_2d7a9afcfff37e0.jpg)
+![image](https://user-images.githubusercontent.com/48114601/120563932-5ebca500-c3cf-11eb-94a6-e432aec94cc3.png)
 
 _A close up of a plant made with large blades. Notice the poor quality of the cast shadows._
 
@@ -151,7 +153,7 @@ If you wish to create a new material with different setting for this shader, rig
   
   4.3.1 **Color Parameters**
 
-![](RackMultipart20210602-4-iqprec_html_dad369e86b810e83.png)
+![image](https://user-images.githubusercontent.com/48114601/120563916-549aa680-c3cf-11eb-8381-ebd38720bc2d.png)
 
 ***Light***
 
@@ -175,7 +177,7 @@ If you wish to create a new material with different setting for this shader, rig
 
 4.3.2 **Sizing**
 
-![](RackMultipart20210602-4-iqprec_html_b3e2231108f5881a.png)
+![image](https://user-images.githubusercontent.com/48114601/120563899-4cdb0200-c3cf-11eb-8783-cc4689ac0810.png)
 
 ***Blade Thickness***
 
@@ -195,7 +197,7 @@ If you wish to create a new material with different setting for this shader, rig
 
 4.3.3 **Tessellation**
 
-![](RackMultipart20210602-4-iqprec_html_b2851a4d033dc459.png)
+![image](https://user-images.githubusercontent.com/48114601/120563881-43ea3080-c3cf-11eb-8713-bd68cbf22042.png)
 
 ***Blade Density***
 
@@ -205,7 +207,7 @@ If you wish to create a new material with different setting for this shader, rig
 
 4.3.4 **Wind Map**
 
-![](RackMultipart20210602-4-iqprec_html_5f2521507d12ecad.png)
+![image](https://user-images.githubusercontent.com/48114601/120563858-3634ab00-c3cf-11eb-95da-96f68a57a94b.png)
 
 ***Wind Movement***
 
@@ -234,7 +236,7 @@ If you wish to create a new material with different setting for this shader, rig
 
 4.3.5 **Second Plant** – The second plant section is labeled using the &#39;Stem&#39; keyword
 
-![](RackMultipart20210602-4-iqprec_html_f44dba53e54b5d39.png)
+![Picture1](https://user-images.githubusercontent.com/48114601/120563831-274df880-c3cf-11eb-88fc-afdfcdf477ae.png)
 
 - **Stem Placement Noise**: Adjusts the frequency of the noise map used to create height variance between areas of plants. Low values will result in gradual, rolling transitions. High values will result in numerous short transitions.
 
